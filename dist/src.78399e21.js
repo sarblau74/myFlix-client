@@ -109,15 +109,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   // Override the current require with this new one
-  //parcelRequire = newRequire;
+  parcelRequire = newRequire;
 
- // if (error) {
+  if (error) {
     // throw error from earlier, _after updating parcelRequire_
-   // throw error;
- // }
+    throw error;
+  }
 
- // return newRequire;
-//})({"../node_modules/react/cjs/react.development.js":[function(require,module,exports) {
+  return newRequire;
+})({"../node_modules/react/cjs/react.development.js":[function(require,module,exports) {
 /**
  * @license React
  * react.development.js
@@ -2515,15 +2515,15 @@ if ("development" !== "production") {
     }
   })();
 }
-//},{}],"../node_modules/react/index.js":[function(require,module,exports) {
-//use strict';
+},{}],"../node_modules/react/index.js":[function(require,module,exports) {
+'use strict';
 
 if ("development" === 'production') {
   module.exports = require('./cjs/react.production.min.js');
 } else {
   module.exports = require('./cjs/react.development.js');
 }
-},{"./cjs/react.development.js":"../node_modules/react/cjs/react.development.js"},"../node_modules/scheduler/cjs/scheduler.development.js":[function(require,module,exports) {
+},{"./cjs/react.development.js":"../node_modules/react/cjs/react.development.js"}],"../node_modules/scheduler/cjs/scheduler.development.js":[function(require,module,exports) {
 /**
  * @license React
  * scheduler.development.js
@@ -29010,7 +29010,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49236" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52797" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
