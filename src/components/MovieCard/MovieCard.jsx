@@ -1,14 +1,5 @@
 import React from 'react';
 
-const MovieCard = ({ movie }) => {
-  return (
-    <div className="movie-card">
-      <h2>{movie.title}</h2>
-      {/* Display additional movie info if needed */}
-    </div>
-  );
-};
-
 {movies.map(movie => (
   <MovieCard key={movie._id} movie={movie} />
 ))}
@@ -29,7 +20,5 @@ MovieCard.propTypes = {
     // Add other required movie props as needed
   }).isRequired,
 };
-
-export default MovieCard;
 
 export default MovieCard;
