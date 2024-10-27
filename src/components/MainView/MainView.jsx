@@ -5,13 +5,13 @@ const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem("token")
-  ); // Check if token exists for authentication status
+  );
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [fetchError, setFetchError] = useState(""); // New state for fetch error
 
   useEffect(() => {
     if (isAuthenticated) {
-      // Fetch movies only if authenticated
       const token = localStorage.getItem("token");
       axios
         .get("https://my-flix-app-7899.onrender.com/movies", {
@@ -19,9 +19,15 @@ const MainView = () => {
         })
         .then((response) => {
           setMovies(response.data);
+          setFetchError(""); // Clear fetch error if successful
         })
         .catch((error) => {
           console.log("Error fetching movies:", error);
+          setFetchError("Failed to fetch movies. Please try again later.");
+          // Optional: Log out if token is invalid
+          if (error.response && error.response.status === 401) {
+            handleLogout();
+          }
         });
     }
   }, [isAuthenticated]);
@@ -32,7 +38,7 @@ const MainView = () => {
       .post("https://my-flix-app-7899.onrender.com/login", loginData)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        setIsAuthenticated(true); // Update authentication status
+        setIsAuthenticated(true);
         setError("");
       })
       .catch(() => {
@@ -43,7 +49,7 @@ const MainView = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
-    setMovies([]); // Clear movies after logout
+    setMovies([]);
   };
 
   if (!isAuthenticated) {
@@ -78,11 +84,11 @@ const MainView = () => {
     <div>
       <button onClick={handleLogout}>Log Out</button>
       <h2>Movie List</h2>
+      {fetchError && <p style={{ color: "red" }}>{fetchError}</p>}
       <div>
         {movies.map((movie) => (
           <div key={movie._id}>
             <h3>{movie.title}</h3>
-            {/* Optionally include more movie details here */}
           </div>
         ))}
       </div>

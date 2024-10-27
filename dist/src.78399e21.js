@@ -34905,7 +34905,7 @@ var MainView = function MainView() {
   var _useState3 = (0, _react.useState)(!!localStorage.getItem("token")),
     _useState4 = _slicedToArray(_useState3, 2),
     isAuthenticated = _useState4[0],
-    setIsAuthenticated = _useState4[1]; // Check if token exists for authentication status
+    setIsAuthenticated = _useState4[1];
   var _useState5 = (0, _react.useState)({
       username: "",
       password: ""
@@ -34917,9 +34917,13 @@ var MainView = function MainView() {
     _useState8 = _slicedToArray(_useState7, 2),
     error = _useState8[0],
     setError = _useState8[1];
+  var _useState9 = (0, _react.useState)(""),
+    _useState10 = _slicedToArray(_useState9, 2),
+    fetchError = _useState10[0],
+    setFetchError = _useState10[1]; // New state for fetch error
+
   (0, _react.useEffect)(function () {
     if (isAuthenticated) {
-      // Fetch movies only if authenticated
       var token = localStorage.getItem("token");
       _axios.default.get("https://my-flix-app-7899.onrender.com/movies", {
         headers: {
@@ -34927,8 +34931,14 @@ var MainView = function MainView() {
         }
       }).then(function (response) {
         setMovies(response.data);
+        setFetchError(""); // Clear fetch error if successful
       }).catch(function (error) {
         console.log("Error fetching movies:", error);
+        setFetchError("Failed to fetch movies. Please try again later.");
+        // Optional: Log out if token is invalid
+        if (error.response && error.response.status === 401) {
+          handleLogout();
+        }
       });
     }
   }, [isAuthenticated]);
@@ -34936,7 +34946,7 @@ var MainView = function MainView() {
     e.preventDefault();
     _axios.default.post("https://my-flix-app-7899.onrender.com/login", loginData).then(function (response) {
       localStorage.setItem("token", response.data.token);
-      setIsAuthenticated(true); // Update authentication status
+      setIsAuthenticated(true);
       setError("");
     }).catch(function () {
       setError("Invalid username or password.");
@@ -34945,7 +34955,7 @@ var MainView = function MainView() {
   var handleLogout = function handleLogout() {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
-    setMovies([]); // Clear movies after logout
+    setMovies([]);
   };
   if (!isAuthenticated) {
     return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "Login"), /*#__PURE__*/React.createElement("form", {
@@ -34978,7 +34988,11 @@ var MainView = function MainView() {
   }
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleLogout
-  }, "Log Out"), /*#__PURE__*/React.createElement("h2", null, "Movie List"), /*#__PURE__*/React.createElement("div", null, movies.map(function (movie) {
+  }, "Log Out"), /*#__PURE__*/React.createElement("h2", null, "Movie List"), fetchError && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "red"
+    }
+  }, fetchError), /*#__PURE__*/React.createElement("div", null, movies.map(function (movie) {
     return /*#__PURE__*/React.createElement("div", {
       key: movie._id
     }, /*#__PURE__*/React.createElement("h3", null, movie.title));

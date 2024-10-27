@@ -14,14 +14,6 @@ const MovieCard = ({ movie }) => {
 ))}
 import PropTypes from 'prop-types';
 
-const MovieCard = ({ movie }) => {
-  return (
-    <div className="movie-card">
-      <h2>{movie.title}</h2>
-    </div>
-  );
-};
-
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -32,4 +24,3 @@ MovieCard.propTypes = {
 
 export default MovieCard;
 
-export default MovieCard;
