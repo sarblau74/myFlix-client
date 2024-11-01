@@ -22,3 +22,7 @@ const root = createRoot(container);
 
 // Tells React to render your app in the root DOM element
 root.render(<MyFlixApplication />);
+const port = process.env.PORT || 1234;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
