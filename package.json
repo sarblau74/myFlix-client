@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "description": "A client-side application for myFlix",
     "main": "index.js",
-    "scripts": {
-        "start": "parcel src/index.html",
-        "build": "parcel build src/index.html"
+"scripts": {
+  "build": "parcel build src/index.html",
+  "start": "parcel src/index.html --port $PORT"
     },
     "dependencies": {
         "axios": "^1.7.7",
