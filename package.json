@@ -3,21 +3,28 @@
     "version": "1.0.0",
     "description": "A client-side application for myFlix",
     "main": "index.html",
-"scripts": {
-  "build": "parcel build src/index.html",
-  "start": "parcel src/index.html --port $PORT"
+    "scripts": {
+        "build": "parcel build src/index.html",
+        "start": "parcel src/index.html --port $PORT"
     },
-    
     "dependencies": {
+        "@babel/preset-env": "^7.26.0",
         "axios": "^1.7.7",
         "immutable": "^4.3.7",
         "prop-types": "^15.8.1",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "react-dom": "^18.3.1",
+        "semver": "^7.6.3"
     },
     "devDependencies": {
         "parcel": "^1.12.4",
         "parcel-bundler": "^1.12.5",
         "sass": "^1.79.4"
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+        ]
     }
 }
