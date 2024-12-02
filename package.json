@@ -1,31 +1,32 @@
 {
-    "name": "myflix-client",
-    "version": "1.0.0",
-    "description": "A client-side application for myFlix",
-    "main": "index.html",
-    "scripts": {
-        "build": "parcel build src/index.html",
-        "start": "parcel src/index.html --port $PORT"
-    },
-    "dependencies": {
-        "axios": "^1.7.7",
-        "immutable": "^4.3.7",
-        "prop-types": "^15.8.1",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "semver": "^7.6.3"
-    },
-    "devDependencies": {
-        "@babel/preset-env": "^7.26.0",
-        "@babel/preset-react": "^7.25.9",
-        "parcel": "^2.13.0",
-        "parcel-bundler": "^1.2.1",
-        "sass": "^1.79.4"
-    },
-    "babel": {
-        "presets": [
-            "@babel/preset-env",
-            "@babel/preset-react"
-        ]
-    }
+  "name": "myflix-client",
+  "version": "1.0.0",
+  "description": "A client-side application for myFlix",
+  "scripts": {
+    "build": "parcel build src/index.html",
+    "start": "parcel src/index.html --port $PORT"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "immutable": "^4.3.7",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "semver": "^7.6.3"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@parcel/transformer-sass": "^2.13.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.13.0",
+    "parcel-bundler": "^1.2.1",
+    "sass": "^1.79.4"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  }
 }
